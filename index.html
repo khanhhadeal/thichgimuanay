@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<body style="background:black;color:white;text-align:center;padding:50px">
+
+<h2>KhanhHa Deal</h2>
+
+<input id="link" placeholder="Dán link Shopee" style="width:90%;padding:10px">
+<br><br>
+
+<button onclick="convert()" style="padding:10px;background:orange;color:white">
+Chuyển đổi
+</button>
+
+<p id="kq"></p>
+
+<script>
+function convert(){
+ let link = document.getElementById("link").value;
+
+ let newlink = "https://shopee.vn/?af_siteid=17356830150&url=" + encodeURIComponent(link);
+
+ document.getElementById("kq").innerHTML = newlink;
+}
+</script>
+
+</body>
+</html>
