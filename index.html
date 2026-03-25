@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -10,21 +9,35 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   min-height: 100vh;
-  padding: 20px; /* chống dính sát mép */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .container {
   background: white;
   padding: 25px;
   border-radius: 20px;
-  width: 320px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+  width: 100%;
+  max-width: 360px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   text-align: center;
+
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
 }
 
 h2 {
@@ -35,24 +48,41 @@ h2 {
 input {
   width: 100%;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid #ddd;
   margin-bottom: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #ff4d6d;
+  box-shadow: 0 0 5px rgba(255,77,109,0.3);
 }
 
 button {
   width: 100%;
   padding: 12px;
   border: none;
-  border-radius: 10px;
-  background: #ff4d6d;
+  border-radius: 12px;
+
+  background: linear-gradient(45deg, #ff4d6d, #ff758f);
   color: white;
   font-weight: bold;
   font-size: 15px;
+
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
-  opacity: 0.9;
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.copy {
+  margin-top: 10px;
+  background: linear-gradient(45deg, #ff758f, #ff9a9e);
 }
 
 #result {
@@ -62,9 +92,23 @@ button:hover {
   color: #333;
 }
 
-.copy {
-  margin-top: 10px;
-  background: #ff85a1;
+/* Toast thông báo */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.toast.show {
+  opacity: 1;
 }
 </style>
 
@@ -77,13 +121,14 @@ button:hover {
 
   <input id="link" placeholder="Dán link Shopee vào đây...">
 
-<button onclick="convert()">🔗 Chuyển đổi link</button>
+  <button onclick="convert()">🔗 Chuyển đổi link</button>
 
   <div id="result"></div>
 
-<button class="copy" onclick="copyLink()">📋 Copy link</button>
-
+  <button class="copy" onclick="copyLink()">📋 Copy link</button>
 </div>
+
+<div id="toast" class="toast">Đã copy!</div>
 
 <script>
 let finalLink = "";
@@ -92,11 +137,10 @@ function convert(){
   let url = document.getElementById("link").value;
 
   if(!url){
-    document.getElementById("result").innerHTML = "❌ Vui lòng nhập link!";
+    showToast("❌ Nhập link trước!");
     return;
   }
 
-  // 👉 THAY ID CỦA BẠN Ở ĐÂY
   finalLink = "https://shopee.vn/?af_siteid=17356830150&url=" + encodeURIComponent(url);
 
   document.getElementById("result").innerHTML = "✅ " + finalLink;
@@ -104,14 +148,25 @@ function convert(){
 
 function copyLink(){
   if(!finalLink){
-    alert("Chưa có link!");
+    showToast("❌ Chưa có link!");
     return;
   }
 
   navigator.clipboard.writeText(finalLink);
-  alert("Đã copy!");
+  showToast("✅ Đã copy!");
+}
+
+function showToast(msg){
+  let toast = document.getElementById("toast");
+  toast.innerText = msg;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
 }
 </script>
 
 </body>
 </html>
+  
