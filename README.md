@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KhanhHa Deal</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+h2 {
+  color: #ff4d6d;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#result {
+  margin-top: 15px;
+  font-size: 13px;
+  word-break: break-all;
+  color: #333;
+}
+
+.copy {
+  margin-top: 10px;
+  background: #ff85a1;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <h2>💖 THÍCH GÌ MUA NẤY</h2>
+
+  <input id="link" placeholder="Dán link Shopee vào đây...">
+
+<button onclick="convert()">🔗 Chuyển đổi link</button>
+
+  <div id="result"></div>
+
+<button class="copy" onclick="copyLink()">📋 Copy link</button>
+
+</div>
+
+<script>
+let finalLink = "";
+
+function convert(){
+  let url = document.getElementById("link").value;
+
+  if(!url){
+    document.getElementById("result").innerHTML = "❌ Vui lòng nhập link!";
+    return;
+  }
+
+  // 👉 THAY ID CỦA BẠN Ở ĐÂY
+  finalLink = "https://shopee.vn/?af_siteid=17356830150&url=" + encodeURIComponent(url);
+
+  document.getElementById("result").innerHTML = "✅ " + finalLink;
+}
+
+function copyLink(){
+  if(!finalLink){
+    alert("Chưa có link!");
+    return;
+  }
+
+  navigator.clipboard.writeText(finalLink);
+  alert("Đã copy!");
+}
+</script>
+
+</body>
