@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ĐỔI LINK SHOPEE</title>
+<title>KhanhHa Deal</title>
 
 <style>
 body {
@@ -169,4 +169,3 @@ function showToast(msg){
 
 </body>
 </html>
-  
