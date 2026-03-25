@@ -72,7 +72,7 @@ button:hover {
 <body>
 
 <div class="container">
-  <h2>💖 THÍCH GÌ MUA NẤY</h2>
+  <h2>💖 SĂN MÃ XỊN SHOPEE</h2>
 
   <input id="link" placeholder="Dán link Shopee vào đây...">
 
